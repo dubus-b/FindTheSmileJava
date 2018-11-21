@@ -8,7 +8,10 @@ package FindTheSmile;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.sql.SQLException;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -73,7 +76,16 @@ public class MailAjax extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try (PrintWriter out = response.getWriter()) {
-            String name = request.getParameter("email");
+            String email = request.getParameter("email");
+            Database dbAction = new Database();
+            boolean isTaken = false;
+            isTaken =dbAction.MailIsTaken(email);
+            if (isTaken)
+                out.println("{\"mailTaken\" : true}");
+            else
+                out.println("{\"mailTaken\" : false}");
+        } catch (SQLException ex) {
+            Logger.getLogger(MailAjax.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
        

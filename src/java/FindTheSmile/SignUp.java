@@ -13,6 +13,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -35,26 +40,16 @@ public class SignUp extends HttpServlet {
             throws ServletException, IOException {
         String firstname = request.getParameter("firstname");
         String lastname = request.getParameter("lastname");
-        String birthdate = request.getParameter("birthdate");
+        String sbirthdate = request.getParameter("birthdate");
         String mail = request.getParameter("email");
         String phone = request.getParameter("phone");
         String password = request.getParameter("passwd");
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
             try {
-                String dbusername = "root";
-                String dbpassword = "root";
-                Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/FindTheSmile", dbusername, dbpassword);
-                Statement stmt = connection.createStatement();
-                String tquery = "SELECT id FROM USAGERS";
-                ResultSet r = stmt.executeQuery(tquery);
-                int last_id = -1;
-                while (r.next()) {
-                    last_id = Integer.parseInt(r.getString("id"));
-                }
-                String query = "INSERT INTO USAGERS (NOM, PRENOM, DATEDENAISSANCE, TELEPHONNE,COURRIEL, MOTDEPASSE, ID) VALUES ('" + lastname + "', 'Armand','2010-04-02', '068067876', 'benjamin.dubus', 'password', " + (last_id + 1) + ")";
-                stmt.executeUpdate(query);
-                connection.close();
+                Users User = new Users(firstname, lastname, sbirthdate, phone, mail, password, 0, 0);
+                Database dbaction = new Database();
+                int result = dbaction.SignUp(User);
             } catch (SQLException ex) {
                 System.err.println("Erreur de connexion: " + ex);
             }
