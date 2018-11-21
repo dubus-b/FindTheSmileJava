@@ -41,8 +41,14 @@ public class Database {
             return result;
         }
     }
-    public Boolean MailIsTaken()
+    public Boolean MailIsTaken(String email) throws SQLException
     {
-        return MailIsTaken;
+        
+        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/FindTheSmile", dbusername, dbpassword);
+        Statement stmt = connection.createStatement();
+        String query = "SELECT courriel FROM USAGERS WHERE COURRIEL = '" + email + "'";
+        ResultSet r;
+        r = stmt.executeQuery(query);
+        return r.next();            
     }
 }

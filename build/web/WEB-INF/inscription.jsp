@@ -44,7 +44,7 @@
                         </div>
                         <div class="control-group">
                             <input required class="login-field" placeholder="Numéro de téléphone" type="tel" name="phone" value="">
-                        </div>`
+                        </div>
                         <div class="control-group">
                             <p id="invalid-email"></p>
                             <input required class="login-field" id="mail" placeholder="Adresse de courriel" type="email" minLenght="3" maxlength="19" name="email" value="">
@@ -55,7 +55,7 @@
                         <div class="control-group">
                             <input required class="login-field" placeholder="Confirmez le mot de passe" type="password" name="confirm-passwd" value="">
                         </div>
-                        <input required class="btn btn-primary btn-large btn-block" type="submit" value="Soumettre">
+                        <input id="submit-btn"required class="btn btn-primary btn-large btn-block" type="submit" value="Soumettre">
                     </form>
                 </div>
             </div>
@@ -64,14 +64,26 @@
 </html>
 
 <script>
-    $("#mail").keypress(function(){
+    var jsonResult;
+    $("#mail").keyup(function(){
     json = {"email" : $('#mail').val()};
     $.ajax({url: "MailAjax",
         type: "POST",
         data : json,
         success: function(result)
         {
-            $("#invalid-email").html(result);
-        }});
-});
+            jsonResult = JSON.parse(result);
+            if (jsonResult["mailTaken"] == true)
+              {
+                  $("#invalid-email").html("L'addresse saisie est déjà utilisée");
+                  $("#submit-btn").attr("disabled", true);
+                  $("#submit-btn").css('background', 'grey');
+              }
+              else
+              {
+                  $("#submit-btn").attr("disabled", false);
+                  $("#submit-btn").css('background', '#3498DB');
+              }
+          }});
+  });
 </script>
