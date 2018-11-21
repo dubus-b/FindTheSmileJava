@@ -15,14 +15,14 @@ public class Users {
 
     private String name;
     private String surname;
-    private Date birstDate;
+    private String birstDate; //DATE
     private String phoneNumber;
     private String email;
     private String password;
     private Integer lastScore;
     private Integer bestScore;
 
-    public Users(String argName, String argSurname, Date argBirstDate,
+    public Users(String argName, String argSurname, String argBirstDate,
             String argPhoneNumber, String argEmail, String argPassword,
             Integer argLastScore, Integer argBestScore) {
         this.name = argName;
@@ -43,7 +43,7 @@ public class Users {
         return surname;
     }
 
-    public Date getBirstDate() {
+    public String getBirstDate() {
         return birstDate;
     }
 

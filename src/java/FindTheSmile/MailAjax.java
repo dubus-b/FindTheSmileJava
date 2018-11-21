@@ -73,7 +73,8 @@ public class MailAjax extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try (PrintWriter out = response.getWriter()) {
-            String name = request.getParameter("email");
+            String email = request.getParameter("email");
+            out.println(email);
         }
     }
        

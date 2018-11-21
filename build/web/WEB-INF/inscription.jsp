@@ -44,9 +44,10 @@
                         </div>
                         <div class="control-group">
                             <input required class="login-field" placeholder="Numéro de téléphone" type="tel" name="phone" value="">
-                        </div>
+                        </div>`
                         <div class="control-group">
-                            <input required class="login-field" placeholder="Adresse de courriel" type="email" minLenght="3" name="email" value="">
+                            <p id="invalid-email"></p>
+                            <input required class="login-field" id="mail" placeholder="Adresse de courriel" type="email" minLenght="3" maxlength="19" name="email" value="">
                         </div>
                         <div class="control-group">
                             <input required class="login-field" placeholder="Mot de passe" type="password" name="passwd" value="">
@@ -63,14 +64,14 @@
 </html>
 
 <script>
-$("button").click(function(){
-    json = {"email" : "benjamin.dubus@epitech.eu"};
+    $("#mail").keypress(function(){
+    json = {"email" : $('#mail').val()};
     $.ajax({url: "MailAjax",
         type: "POST",
         data : json,
         success: function(result)
         {
-            $("#div1").html(result);
+            $("#invalid-email").html(result);
         }});
 });
 </script>
