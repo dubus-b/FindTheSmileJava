@@ -1,0 +1,179 @@
+/* 
+    Created on : 25 sept. 2018, 18:37:30
+    Author     : bdubus
+*/
+
+.game-img:hover {
+    border: 2px solid blue;
+}
+
+.wrong {
+    opacity: 0.5;
+}
+
+* {
+box-sizing: border-box;
+}
+
+*:focus {
+outline: none;
+}
+body {
+font-family: Arial;
+background-color: #3498DB;
+}
+
+.login {
+margin: 20px auto;
+width: 350px;
+}
+.login-screen {
+background-color: #FFF;
+padding: 20px;
+border-radius: 5px
+}
+
+.box {
+overflow:hidden;
+margin: 20px auto;
+width: auto;
+}
+
+.game-box {
+margin: 10px auto;
+width: 375px;
+}
+
+.box-content {
+background-color: #FFF;
+padding: 20px;
+border-radius: 5px
+}
+
+.title {
+    text-align: center;
+    color: #777;  
+}
+
+.app-title {
+text-align: center;
+color: #777;
+}
+
+.login-form {
+text-align: center;
+}
+.control-group {
+margin-bottom: 10px;
+}
+
+input {
+text-align: center;
+background-color: #ECF0F1;
+border: 2px solid transparent;
+border-radius: 3px;
+font-size: 16px;
+font-weight: 200;
+padding: 10px 0;
+width: 250px;
+transition: border .5s;
+}
+
+input:focus {
+border: 2px solid #3498DB;
+box-shadow: none;
+}
+
+.btn {
+  border: 2px solid transparent;
+  background: #3498DB;
+  color: #ffffff;
+  font-size: 16px;
+  line-height: 25px;
+  padding: 10px 0;
+  text-decoration: none;
+  text-shadow: none;
+  border-radius: 3px;
+  box-shadow: none;
+  transition: 0.25s;
+  display: block;
+  width: 250px;
+  margin: 0 auto;
+}
+
+.btn:hover {
+  background-color: #2980B9;
+}
+
+.login-link {
+  font-size: 12px;
+  color: #444;
+  display: block;
+  margin-top: 12px;
+}
+
+#logo, #trophée {
+    width:100px;
+    height:100px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: #111;
+}
+
+.active {
+    background-color: red;
+}
+
+.navbar {
+  overflow: hidden;
+  background-color: #777;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.table-score {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.td-score{
+    text-align: left;
+    padding: 8px; 
+}
+
+tr:nth-child(even){
+    background-color: #f2f2f2
+}
+
+.th-score {
+    text-align: left;
+    padding: 8px;
+    background-color: #3498DB;
+    color: white;
+}

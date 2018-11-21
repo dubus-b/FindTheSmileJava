@@ -12,6 +12,7 @@ import java.util.Date;
  * @author bdubus
  */
 public class Users {
+
     private String name;
     private String surname;
     private Date birstDate;
@@ -33,7 +34,6 @@ public class Users {
         this.lastScore = argLastScore;
         this.bestScore = argBestScore;
     }
-    private String name;
 
     public String getName() {
         return name;
