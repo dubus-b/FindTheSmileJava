@@ -10,6 +10,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -44,11 +47,45 @@ public class Database {
     public Boolean MailIsTaken(String email) throws SQLException
     {
         
-        Connection connection = DriverManager.getConnection("jdbc:derby://localhost:1527/FindTheSmile", dbusername, dbpassword);
+        Connection connection = DriverManager.getConnection(jdbcPath, dbusername, dbpassword);
         Statement stmt = connection.createStatement();
         String query = "SELECT courriel FROM USAGERS WHERE COURRIEL = '" + email + "'";
         ResultSet r;
         r = stmt.executeQuery(query);
-        return r.next();            
+        MailIsTaken = r.next();
+        connection.close();
+        return MailIsTaken;            
+    }
+    
+    public Boolean prepareLogin(String email, String password) throws SQLException
+    {
+        Connection connection = DriverManager.getConnection(jdbcPath, dbusername,dbpassword);
+        Statement stmt = connection.createStatement();
+        ResultSet r;
+        String query = "SELECT id FROM USAGERS WHERE COURRIEL = '" + email + "' AND MOTDEPASSE = '" + password + "'" ;
+        r = stmt.executeQuery(query);
+        boolean userIsValid = r.next();
+        connection.close();
+        return userIsValid;
+    }
+    public Users getUserByEmail(String email) throws SQLException
+    {
+        Connection connection = DriverManager.getConnection(jdbcPath, dbusername, dbpassword);
+        Statement stmt = connection.createStatement();
+        ResultSet r;
+        String query = "SELECT courriel FROM USAGERS WHERE COURRIEL = '" + email + "'";
+        r = stmt.executeQuery(query);
+        if (r.next() == false)
+            return null;
+        else
+        {
+            DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+            Date date = r.getDate("DATEDENAISSANCE");
+            String DateString = df.format(date);
+            return new Users(r.getString("NOM"), r.getString("PRENOM"),DateString, 
+                    r.getString("TELEPHONNE"), r.getString("COURRIEL"), 
+                    r.getString("MOTDEPASSE"), r.getInt("DERNIERSCORE"), 
+                    r.getInt("MEILLEURSCORE"));
+        }
     }
 }
