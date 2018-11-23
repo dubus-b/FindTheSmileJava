@@ -13,11 +13,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="res/style.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <link rel="apple-touch-icon" sizes="180x180" href="/TP1-BenjaminDUBUS/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="/TP1-BenjaminDUBUS/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/TP1-BenjaminDUBUS/favicon-16x16.png">
-        <link rel="manifest" href="/TP1-BenjaminDUBUS/site.webmanifest">
-        <link rel="mask-icon" href="/TP1-BenjaminDUBUS/safari-pinned-tab.svg" color="#5bbad5">
+        <link rel="apple-touch-icon" sizes="180x180" href="res/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="res/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="res/favicon-16x16.png">
+        <link rel="manifest" href="res/site.webmanifest">
+        <link rel="mask-icon" href="res/safari-pinned-tab.svg" color="#5bbad5">
         <meta name="msapplication-TileColor" content="#da532c">
         <meta name="theme-color" content="#ffffff">
         <script src="res/game.js"></script>
@@ -25,8 +25,8 @@
     <body>
         <nav>
             <ul>
-                <li><a href="index.html">Accueil</a></li>
-                <li><a href="apropos.html">A propos</a></li>
+                <li><a href="accueil">Accueil</a></li>
+                <li><a href="apropos">A propos</a></li>
             </ul>
         </nav>
         <div class="game-box">

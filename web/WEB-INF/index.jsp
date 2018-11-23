@@ -3,7 +3,7 @@
     Created on : 20 nov. 2018, 20:24:44
     Author     : bdubus
 --%>
-
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -49,16 +49,17 @@
                     <h1>Connectez-vous pour jouer</h1>
                     </div>
                     <div class="login-form">
-                        <form action="accueil" method="post">
+                        <form method="post">
                             <div class="control-group">
-                                <input class="login-field" placeholder="Nom d'utilisateur"type="text">
-                                <label class="login-field-icon fui-user" placeholder="Nom d'utilisateur" for="login-name"></label>
+                                <input class="login-field" name="email" placeholder="Courriel"type="text">
+                                <label class="login-field-icon fui-user" placeholder="Courriel" for="login-name"></label>
                             </div>
                             <div class="control-group">
-                                <input class="login-field" type="password" placeholder="Mot de passe">
+                                <input class="login-field" name="password" type="password" placeholder="Mot de passe">
                                 <label class="login-field-icon fui-lock" for="login-pass"></label>
                             </div>
                             <button class="btn btn-primary btn-large btn-block">Soumettre</button>
+                            <span class="erreur">${erreur}</span>
                             <br>
                             <p>Vous n'avez pas de compte inscrivez-vous: <a style="color: red;"class="title" href="inscription"><b>ici</b></a></p>
                         </form>

@@ -5,22 +5,20 @@
  */
 package FindTheSmile;
 
-import java.util.Date;
-
 /**
  *
  * @author bdubus
  */
 public class Users {
 
-    private String name;
-    private String surname;
-    private String birstDate; //DATE
-    private String phoneNumber;
-    private String email;
-    private String password;
-    private Integer lastScore;
-    private Integer bestScore;
+    private final String name;
+    private final String surname;
+    private final String birstDate; //DATE
+    private final String phoneNumber;
+    private final String email;
+    private final String password;
+    private final Integer lastScore;
+    private final Integer bestScore;
 
     public Users(String argName, String argSurname, String argBirstDate,
             String argPhoneNumber, String argEmail, String argPassword,
