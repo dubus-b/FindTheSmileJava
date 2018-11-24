@@ -58,8 +58,6 @@ public void doPost( HttpServletRequest request, HttpServletResponse response ) t
         Database dbAction = new Database();
         Boolean userIsValid;
         try {
-                        System.out.println(email + password);
-
             userIsValid = dbAction.prepareLogin(email, password);
             
         } catch (SQLException ex) {

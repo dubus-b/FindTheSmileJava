@@ -35,15 +35,23 @@ public class Game extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session;
-        session = request.getSession();
-        String mail = (String) session.getAttribute("email");
-        Database dbAction = new Database();
-        try {
-            Users currentUser = dbAction.getUserByEmail(mail);
-        } catch (SQLException ex) {
-            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+        session = request.getSession(false);
+        if (session != null) {
+            String mail = (String) session.getAttribute("email");
+            System.out.println("Mail : " + mail);
+            Database dbAction = new Database();
+            Users currentUser = null;
+            try {
+                currentUser = dbAction.getUserByEmail(mail);
+            } catch (SQLException ex) {
+                System.out.println("FindTheSmile.Game.doGet()");
+                Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            request.setAttribute("name", currentUser.getSurname());
+            request.setAttribute("bestScore", currentUser.getBestScore());
+            request.setAttribute("lastScore", currentUser.getLastScore());
         }
-        this.getServletContext().getRequestDispatcher("/WEB-INF/jeu.jsp").forward( request, response );
+        this.getServletContext().getRequestDispatcher("/WEB-INF/jeu.jsp").forward(request, response);
     }
 
     /**

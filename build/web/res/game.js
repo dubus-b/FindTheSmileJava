@@ -58,6 +58,7 @@ function launchGame()
     }
     doTimer();
     $('#start').hide();
+    $('#welcome').hide();
     $('#reload').show("slow");
     $(document).ready(function () {
         $("img").click(function () {
@@ -125,9 +126,17 @@ function reloadGame()
 function getPoint()
 {
     score = score + 1;
-    if (score == 5)
+    if (score == 10)
     {
         $('#trophée').show();
+        var d = new Date(0, 0, 0, 0, 0, total_counter, 0);
+        if (d.getUTCSeconds() >= 10)
+            test = d.getUTCMinutes() + ':' + d.getUTCSeconds();
+        else
+            test = d.getUTCMinutes() + ':0' + d.getUTCSeconds();
+        
+        $("#lastScore").html(test + " - " + total_counter);
+        clearTimeout(t);
     }
     historique_timer.push(current_point_counter * 1000);
     var ms = getTimeAverage();
@@ -139,4 +148,27 @@ function getPoint()
     $('#avg').html(average);
     $('#score').html(score);
     current_point_counter = 0;
+}
+
+function update_scores()
+{
+    $.ajax({url: "MailAjax",
+        type: "POST",
+        data : json,
+        success: function(result)
+        {
+            jsonResult = JSON.parse(result);
+            if (jsonResult["mailTaken"] == true)
+              {
+                  $("#invalid-email").html("L'addresse saisie est déjà utilisée");
+                  $("#submit-btn").attr("disabled", true);
+                  $("#submit-btn").css('background', 'grey');
+              }
+              else
+              {
+                  $("#submit-btn").attr("disabled", false);
+                  $("#submit-btn").css('background', '#3498DB');
+              }
+          }});
+  });
 }

@@ -32,6 +32,7 @@
         <div class="game-box">
             <div class="box-content">
             <table>
+                <h1 id="welcome" class="title">Bienvenue ${name}</h1> 
                 <tr>
                     <td id="Pic0"></td>
                     <td id="Pic1"></td>
@@ -80,16 +81,21 @@
                     <tr>
                         <th class="th-score">Temps écoulé</th>
                         <th class="th-score">Temps moyen</th>
-                        <th class="th-score">Score</th>
+                        <th class="th-score">Nombre de visages trouvé</th>
+                        <th class="th-score">Meilleur score</th>
+                        <th class="th-score">Dernier score</th>
                     </tr>
                     <tr>
                         <td class="td-score"><p  id="timer">00:00:00</p></td>
                         <td class="td-score"><p id="avg">00:00:00</p></td>
                         <td class="td-score"><p id="score">0</p></td>
+                        <td class="td-score"><p id="bestScore">${bestScore}</p></td>
+                        <td class="td-score"><p id="lastScore">${lastScore}</p></td>
                     </tr>
                 </table>
-                <img src="/TP1-BenjaminDUBUS/images/trophée.jpg" id="trophée"></img>
+                <img src="res/images/trophée.jpg" id="trophée"></img>
             </div>
         </div>
+        
     </body>
 </html>
