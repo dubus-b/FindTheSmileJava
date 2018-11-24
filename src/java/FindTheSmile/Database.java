@@ -14,6 +14,7 @@ import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import org.hibernate.hql.internal.antlr.SqlStatementParserTokenTypes;
 
 /**
  *
@@ -76,8 +77,6 @@ public class Database {
         ResultSet r;
         String query = "SELECT * FROM USAGERS WHERE COURRIEL = '" + email + "'";
         r = stmt.executeQuery(query);
-        ResultSetMetaData rsMetaData = r.getMetaData();
-        System.out.println(rsMetaData);
         if (r.next() == false) {
             return null;
         } else {
@@ -94,9 +93,10 @@ public class Database {
     }
 
     public void updateScore(int lastScore, int bestScore, String email) throws SQLException {
-        Connection connection = DriverManager.getConnection(jdbcPath, dbusername, dbpassword);
-        Statement statement = connection.createStatement();
-        ResultSet resultSet;
-        String query = "UPDATE table_name SET MEILLEURSCORE = "+ bestScore + ", DERNIERSCORE = " + bestScore +" WHERE COURRIEL = '" + email + "'";
+        try (Connection connection = DriverManager.getConnection(jdbcPath, dbusername, dbpassword)) {
+            Statement statement = connection.createStatement();
+            String query = "UPDATE table_name SET MEILLEURSCORE = "+ bestScore + ", DERNIERSCORE = " + bestScore +" WHERE COURRIEL = '" + email + "'";
+            statement.executeUpdate(query);
+        }
     }
 }
