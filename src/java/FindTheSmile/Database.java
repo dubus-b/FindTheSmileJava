@@ -95,7 +95,7 @@ public class Database {
     public void updateScore(int lastScore, int bestScore, String email) throws SQLException {
         try (Connection connection = DriverManager.getConnection(jdbcPath, dbusername, dbpassword)) {
             Statement statement = connection.createStatement();
-            String query = "UPDATE table_name SET MEILLEURSCORE = "+ bestScore + ", DERNIERSCORE = " + bestScore +" WHERE COURRIEL = '" + email + "'";
+            String query = "UPDATE USAGERS SET MEILLEURSCORE = "+ bestScore + ", DERNIERSCORE = " + bestScore +" WHERE COURRIEL = '" + email + "'";
             statement.executeUpdate(query);
         }
     }

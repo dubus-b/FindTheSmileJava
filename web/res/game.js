@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+/* global json */
+
 var historique_timer = [];
 var timerIsOn = false;
 var total_counter = 0;
@@ -11,6 +13,8 @@ var current_point_counter = 0;
 var avg = 0;
 var score = 0;
 var t;
+var lastScore;
+var bestScore;
 var happy_list = [];
 var sad_list = [];
 var wrong = new Audio('res/sons/wrong.mp3');
@@ -49,6 +53,8 @@ function fill_pic_list() {
 }
 function launchGame()
 {
+    bestScore = parseInt($("#bestScore").text());
+    lastScore = parseInt($("#lastScore").text());
     fill_pic_list();
     pics = grid_generator();
     for (idx = 0; idx < 25; idx++)
@@ -123,19 +129,31 @@ function reloadGame()
     $('#score').html(score);
     launchGame();
 }
+
+function formatScore(seconds, target)
+{
+    var d = new Date(0, 0, 0, 0, 0, seconds, 0);
+        if (d.getUTCSeconds() >= 10)
+            formated = d.getUTCMinutes() + ':' + d.getUTCSeconds();
+        else
+            formated = d.getUTCMinutes() + ':0' + d.getUTCSeconds();
+            $(target).html(formated);
+}
+
 function getPoint()
 {
     score = score + 1;
     if (score == 10)
     {
         $('#trophée').show();
-        var d = new Date(0, 0, 0, 0, 0, total_counter, 0);
-        if (d.getUTCSeconds() >= 10)
-            test = d.getUTCMinutes() + ':' + d.getUTCSeconds();
-        else
-            test = d.getUTCMinutes() + ':0' + d.getUTCSeconds();
-        
-        $("#lastScore").html(test + " - " + total_counter);
+        lastScore = total_counter;
+        formatScore(lastScore, "#lastScore");
+        if (total_counter > bestScore)
+        {
+            bestScore = total_counter;
+            formatScore(bestScore, "#bestScore");
+        }
+        updateScores();
         clearTimeout(t);
     }
     historique_timer.push(current_point_counter * 1000);
@@ -150,25 +168,15 @@ function getPoint()
     current_point_counter = 0;
 }
 
-function update_scores()
+function updateScores()
 {
-    $.ajax({url: "MailAjax",
+    var data = {};
+    data["bestScore"] = bestScore;
+    data["lastScore"] = lastScore;
+    data["email"] = "benjamin@epitech.eu";
+    var json = JSON.stringify(data);
+    $.ajax({url: "updateScore",
         type: "POST",
-        data : json,
-        success: function(result)
-        {
-            jsonResult = JSON.parse(result);
-            if (jsonResult["mailTaken"] == true)
-              {
-                  $("#invalid-email").html("L'addresse saisie est déjà utilisée");
-                  $("#submit-btn").attr("disabled", true);
-                  $("#submit-btn").css('background', 'grey');
-              }
-              else
-              {
-                  $("#submit-btn").attr("disabled", false);
-                  $("#submit-btn").css('background', '#3498DB');
-              }
-          }});
-  });
+        data : data
+       });
 }

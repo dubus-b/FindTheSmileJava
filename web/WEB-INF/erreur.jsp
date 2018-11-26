@@ -1,17 +1,10 @@
 <%-- 
-    Document   : apropos
-    Created on : 20 nov. 2018, 20:35:16
+    Document   : erreur
+    Created on : 26 nov. 2018, 15:05:48
     Author     : bdubus
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <title>A propos</title>
@@ -30,7 +23,7 @@ and open the template in the editor.
          <nav>
                 <ul>
                     <li><a href="accueil">Accueil</a></li>
-                    <li><a class="active" href="apropos.html">A propos</a></li>
+                    <li><a href="apropos.html">A propos</a></li>
                     <% if(session.getAttribute("email") != null) { %>
                 <li><a href="moncompte">Mon compte</a></li>
                     <% } %>
@@ -38,10 +31,7 @@ and open the template in the editor.
             </nav>
                 <div class="box">
             <div class="box-content">
-                <p>Ce site a été réalisé par <b>Benjamin DUBUS</b> dans le cadre du module <i>Technologie de l'inforoute.</i>
-                </p>
-                <br>
-                <img style="width: 250px"src="res/images/tech.png"></img>
+                <h1 class="title">${erreur}</h1>
             </div>
         </div>
     </body>

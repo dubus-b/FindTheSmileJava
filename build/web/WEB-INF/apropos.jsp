@@ -31,6 +31,9 @@ and open the template in the editor.
                 <ul>
                     <li><a href="accueil">Accueil</a></li>
                     <li><a class="active" href="apropos.html">A propos</a></li>
+                    <% if(session.getAttribute("email") != null) { %>
+                <li><a href="moncompte">Mon compte</a></li>
+                    <% } %>
                 </ul>
             </nav>
                 <div class="box">

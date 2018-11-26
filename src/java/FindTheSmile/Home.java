@@ -41,6 +41,11 @@ public class Home extends HttpServlet {
      */
     @Override
     public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
+        HttpSession session = request.getSession(false);
+        if (session != null){
+            Object name = session.getAttribute("name");
+            request.setAttribute("name", name);
+    }
         this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward( request, response );
     }
 
@@ -59,7 +64,6 @@ public void doPost( HttpServletRequest request, HttpServletResponse response ) t
         Boolean userIsValid;
         try {
             userIsValid = dbAction.prepareLogin(email, password);
-            
         } catch (SQLException ex) {
             userIsValid = false;
             Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
@@ -67,9 +71,17 @@ public void doPost( HttpServletRequest request, HttpServletResponse response ) t
         HttpSession session;
         if(userIsValid)
         {
+            Users user = null;
+            try {
+                user = dbAction.getUserByEmail(email);
+            } catch (SQLException ex) {
+                Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            }
             PrintWriter out = response.getWriter();
             session = request.getSession();
             session.setAttribute("email", email);
+            System.out.println(user.getSurname());
+            session.setAttribute("name", user.getSurname());
             response.sendRedirect("/TP02-bdubus/jeu");  
         }
         else

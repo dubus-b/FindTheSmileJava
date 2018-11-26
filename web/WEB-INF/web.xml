@@ -20,6 +20,18 @@
         <servlet-name>Game</servlet-name>
         <servlet-class>FindTheSmile.Game</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateScore</servlet-name>
+        <servlet-class>FindTheSmile.UpdateScore</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>account</servlet-name>
+        <servlet-class>FindTheSmile.account</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>signOut</servlet-name>
+        <servlet-class>FindTheSmile.signOut</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SignUp</servlet-name>
         <url-pattern>/inscription</url-pattern>
@@ -39,6 +51,18 @@
     <servlet-mapping>
         <servlet-name>Game</servlet-name>
         <url-pattern>/jeu</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateScore</servlet-name>
+        <url-pattern>/updateScore</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>account</servlet-name>
+        <url-pattern>/moncompte</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>signOut</servlet-name>
+        <url-pattern>/deconnexion</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

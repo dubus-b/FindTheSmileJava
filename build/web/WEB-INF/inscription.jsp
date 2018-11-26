@@ -23,9 +23,17 @@
     </head>
     <body>
         <nav>
-            <ul>
+              <ul>
                 <li><a href="accueil">Accueil</a></li>
                 <li><a href="apropos">A propos</a></li>
+                 <% if (session.getAttribute("email") != null) { %>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn"> <%= (String)request.getAttribute("name") %></a>
+                    <div class="dropdown-content">
+                        <a href="moncompte">Mon compte</a>
+                        <a href="deconnexion">Déconnexion</a>
+                </li>
+                    <% }%>
             </ul>
         </nav>
         <div class="login">
@@ -65,25 +73,24 @@
 
 <script>
     var jsonResult;
-    $("#mail").keyup(function(){
-    json = {"email" : $('#mail').val()};
-    $.ajax({url: "MailAjax",
-        type: "POST",
-        data : json,
-        success: function(result)
-        {
-            jsonResult = JSON.parse(result);
-            if (jsonResult["mailTaken"] == true)
-              {
-                  $("#invalid-email").html("L'addresse saisie est déjà utilisée");
-                  $("#submit-btn").attr("disabled", true);
-                  $("#submit-btn").css('background', 'grey');
-              }
-              else
-              {
-                  $("#submit-btn").attr("disabled", false);
-                  $("#submit-btn").css('background', '#3498DB');
-              }
-          }});
-  });
+    $("#mail").keyup(function () {
+        json = {"email": $('#mail').val()};
+        $.ajax({url: "MailAjax",
+            type: "POST",
+            data: json,
+            success: function (result)
+            {
+                jsonResult = JSON.parse(result);
+                if (jsonResult["mailTaken"] == true)
+                {
+                    $("#invalid-email").html("L'addresse saisie est déjà utilisée");
+                    $("#submit-btn").attr("disabled", true);
+                    $("#submit-btn").css('background', 'grey');
+                } else
+                {
+                    $("#submit-btn").attr("disabled", false);
+                    $("#submit-btn").css('background', '#3498DB');
+                }
+            }});
+    });
 </script>

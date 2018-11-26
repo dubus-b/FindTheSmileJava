@@ -23,9 +23,17 @@
     </head>
     <body>
         <nav>
-            <ul>
+              <ul>
                 <li><a class="active" href="accueil">Accueil</a></li>
-                <li><a href="apropos">À propos</a></li>
+                <li><a href="apropos">A propos</a></li>
+                 <% if (session.getAttribute("email") != null) { %>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn"> <%= (String)request.getAttribute("name") %></a>
+                    <div class="dropdown-content">
+                        <a href="moncompte">Mon compte</a>
+                        <a href="deconnexion">Déconnexion</a>
+                </li>
+                    <% }%>
             </ul>
         </nav>
         <div class="box">
@@ -45,7 +53,8 @@
         </div>
          <div class="login">
                 <div class="login-screen">
-                    <div class="app-title">
+                    <% if(session.getAttribute("email") == null) { %>
+                        <div class="app-title">
                     <h1>Connectez-vous pour jouer</h1>
                     </div>
                     <div class="login-form">
@@ -64,6 +73,15 @@
                             <p>Vous n'avez pas de compte inscrivez-vous: <a style="color: red;"class="title" href="inscription"><b>ici</b></a></p>
                         </form>
                     </div>
+                    <% } %>
+                     <% if(session.getAttribute("email") != null) { %>
+                    <div class="login-form">
+                        <form action="jeu">
+                            <button class="btn btn-primary btn-large btn-block">Jouer</button>
+                        </form>
+                    </div>
+                    <% } %>
+                    
                 </div>
             </div>
     </body>

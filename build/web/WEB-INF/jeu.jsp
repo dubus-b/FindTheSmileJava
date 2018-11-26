@@ -24,56 +24,64 @@
     </head>
     <body>
         <nav>
-            <ul>
+              <ul>
                 <li><a href="accueil">Accueil</a></li>
                 <li><a href="apropos">A propos</a></li>
+                 <% if (session.getAttribute("email") != null) { %>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn"> <%= (String)request.getAttribute("name") %></a>
+                    <div class="dropdown-content">
+                        <a href="moncompte">Mon compte</a>
+                        <a href="deconnexion">Déconnexion</a>
+                </li>
+                    <% }%>
             </ul>
         </nav>
         <div class="game-box">
             <div class="box-content">
-            <table>
-                <h1 id="welcome" class="title">Bienvenue ${name}</h1> 
-                <tr>
-                    <td id="Pic0"></td>
-                    <td id="Pic1"></td>
-                    <td id="Pic2"></td>
-                    <td id="Pic3"></td>
-                    <td id="Pic4"></td>
-                </tr>
-                <tr>
-                    <td id="Pic5"></td>
-                    <td id="Pic6"></td>
-                    <td id="Pic7"></td>
-                    <td id="Pic8"></td>
-                    <td id="Pic9"></td>
-                </tr>
-                 <tr>
-                    <td id="Pic10"></td>
-                    <td id="Pic11"></td>
-                    <td id="Pic12"></td>
-                    <td id="Pic13"></td>
-                    <td id="Pic14"></td>
-                </tr>
-                 <tr>
-                    <td id="Pic15"></td>
-                    <td id="Pic16"></td>
-                    <td id="Pic17"></td>
-                    <td id="Pic18"></td>
-                    <td id="Pic19"></td>
-                </tr>
-                 <tr>
-                    <td id="Pic20"></td>
-                    <td id="Pic21"></td>
-                    <td id="Pic22"></td>
-                    <td id="Pic23"></td>
-                    <td id="Pic24"></td>
-                </tr>
-            </table>
+                <table>
+                    <h1 id="welcome" class="title">Bienvenue ${name}</h1> 
+                    <tr>
+                        <td id="Pic0"></td>
+                        <td id="Pic1"></td>
+                        <td id="Pic2"></td>
+                        <td id="Pic3"></td>
+                        <td id="Pic4"></td>
+                    </tr>
+                    <tr>
+                        <td id="Pic5"></td>
+                        <td id="Pic6"></td>
+                        <td id="Pic7"></td>
+                        <td id="Pic8"></td>
+                        <td id="Pic9"></td>
+                    </tr>
+                    <tr>
+                        <td id="Pic10"></td>
+                        <td id="Pic11"></td>
+                        <td id="Pic12"></td>
+                        <td id="Pic13"></td>
+                        <td id="Pic14"></td>
+                    </tr>
+                    <tr>
+                        <td id="Pic15"></td>
+                        <td id="Pic16"></td>
+                        <td id="Pic17"></td>
+                        <td id="Pic18"></td>
+                        <td id="Pic19"></td>
+                    </tr>
+                    <tr>
+                        <td id="Pic20"></td>
+                        <td id="Pic21"></td>
+                        <td id="Pic22"></td>
+                        <td id="Pic23"></td>
+                        <td id="Pic24"></td>
+                    </tr>
+                </table>
                 <button class="btn btn-primary btn-large btn-block"
                         id="start" onclick="launchGame()">Jouer</button>
                 <button class="btn btn-primary btn-large btn-block"
                         id="reload" onclick="reloadGame()">Recommencer</button>
-           </div>
+            </div>
         </div>
         <div class="box">
             <div class="box-content">
@@ -96,6 +104,6 @@
                 <img src="res/images/trophée.jpg" id="trophée"></img>
             </div>
         </div>
-        
+
     </body>
 </html>

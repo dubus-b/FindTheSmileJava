@@ -14,12 +14,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author bdubus
  */
-public class MailAjax extends HttpServlet {
+public class account extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,14 +39,15 @@ public class MailAjax extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet MailAjax</title>");            
+            out.println("<title>Servlet account</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet MailAjax at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet account at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
     }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -59,9 +61,29 @@ public class MailAjax extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Error error = new Error();
-        request.setAttribute("erreur", error.getWrongMethod());
-        this.getServletContext().getRequestDispatcher("/WEB-INF/erreur.jsp").forward(request, response);
-
+        HttpSession session = request.getSession(false);
+        if (session.getAttribute("email") == null)
+        {
+            request.setAttribute("erreur", error.getUnauthorized());
+            this.getServletContext().getRequestDispatcher("/WEB-INF/erreur.jsp").forward( request, response );
+        }
+        else
+        {
+            Object email = session.getAttribute("email");
+            Database dbAction = new Database();
+            Users user = null;
+            try {
+                user = dbAction.getUserByEmail((String) email);
+            } catch (SQLException ex) {
+                Logger.getLogger(account.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            request.setAttribute("email", user.getEmail());
+            request.setAttribute("name", user.getName());
+            request.setAttribute("lastname", user.getSurname());
+            request.setAttribute("phone", user.getPhoneNumber());
+            request.setAttribute("birthDate", user.getBirstDate());
+            this.getServletContext().getRequestDispatcher("/WEB-INF/account.jsp").forward(request, response);
+        }
     }
 
     /**
@@ -75,20 +97,9 @@ public class MailAjax extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try (PrintWriter out = response.getWriter()) {
-            String email = request.getParameter("email");
-            Database dbAction = new Database();
-            boolean isTaken = false;
-            isTaken =dbAction.MailIsTaken(email);
-            if (isTaken)
-                out.println("{\"mailTaken\" : true}");
-            else
-                out.println("{\"mailTaken\" : false}");
-        } catch (SQLException ex) {
-            Logger.getLogger(MailAjax.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
-       
+
     /**
      * Returns a short description of the servlet.
      *
@@ -98,4 +109,5 @@ public class MailAjax extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 }

@@ -24,6 +24,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -32,8 +33,12 @@ import javax.servlet.http.HttpServletResponse;
 public class SignUp extends HttpServlet {
     
     public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
-        /* Affichage de la page d'inscription */
-        this.getServletContext().getRequestDispatcher("/WEB-INF/inscription.jsp").forward( request, response );
+        HttpSession session = request.getSession(false);
+        if (session != null){
+            Object name = session.getAttribute("name");
+            request.setAttribute("name", name);
+    }
+        this.getServletContext().getRequestDispatcher("/WEB-INF/inscription.jsp").forward(request, response);
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
