@@ -39,8 +39,8 @@ public class Database {
             while (r.next()) {
                 last_id = Integer.parseInt(r.getString("id"));
             }
-            String query = "INSERT INTO USAGERS (NOM, PRENOM, DATEDENAISSANCE, TELEPHONNE,COURRIEL, MOTDEPASSE,DERNIERSCORE, MEILLEURSCORE, ID) VALUES ('" + newUser.getSurname() + "', '" + newUser.getName()
-                    + "','" + newUser.getBirstDate() + "', '" + newUser.getPhoneNumber() + "', '" + newUser.getEmail() + "', '" + newUser.getPassword() + "',0,0," + (last_id + 1) + ")";
+            String query = "INSERT INTO USAGERS (NOM, PRENOM, DATEDENAISSANCE, TELEPHONNE,COURRIEL, MOTDEPASSE,DERNIERSCORE, MEILLEURSCORE, ID) VALUES ('" + newUser.getLastName()+ "', '" + newUser.getFirstName()
+                    + "','" + newUser.getBirthDate() + "', '" + newUser.getPhoneNumber() + "', '" + newUser.getEmail() + "', '" + newUser.getPassword() + "',0,0," + (last_id + 1) + ")";
 
             int result = stmt.executeUpdate(query);
             return result;
@@ -110,7 +110,7 @@ public class Database {
     {
          try (Connection connection = DriverManager.getConnection(jdbcPath, dbusername, dbpassword)) {
             Statement statement = connection.createStatement();
-            String query = "UPDATE USAGERS SET NOM = '" + user.getSurname() + "', PRENOM = '" + user.getName() + "', DATEDENAISSANCE =  '" + user.getBirstDate() + "', TELEPHONNE = '" + user.getPhoneNumber()
+            String query = "UPDATE USAGERS SET NOM = '" + user.getLastName()+ "', PRENOM = '" + user.getFirstName()+ "', DATEDENAISSANCE =  '" + user.getBirthDate() + "', TELEPHONNE = '" + user.getPhoneNumber()
                     + "' WHERE COURRIEL = '" + user.getEmail() + "'";
             statement.executeUpdate(query);
         }

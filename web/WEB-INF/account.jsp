@@ -28,7 +28,7 @@
                 <li><a href="apropos">A propos</a></li>
                     <% if (session.getAttribute("email") != null) {%>
                 <li class="dropdown">
-                    <a href="javascript:void(0)" class="dropbtn"> <%= (String) request.getAttribute("name")%></a>
+                    <a href="javascript:void(0)" class="dropbtn"> <%= (String) request.getAttribute("firstName")%></a>
                     <div class="dropdown-content">
                         <a class="active" href="moncompte">Mon compte</a>
                         <a href="deconnexion">Déconnexion</a>
@@ -43,10 +43,10 @@
                     <form action="moncompte" method="POST">
                         <h1 class="title"> Mes informations personelles</h1>
                         <div class="control-group">
-                            <input required class="login-field" placeholder="Prénom" type="text" name="firstname" value="${name}">
+                            <input required class="login-field" placeholder="Prénom" type="text" name="firstName" value="${firstName}">
                         </div>
                         <div class="control-group">
-                            <input required class="login-field" placeholder="Nom" type="text" name="lastname" value="${lastname}">
+                            <input required class="login-field" placeholder="Nom" type="text" name="lastName" value="${lastName}">
                         </div>
                         <div class="control-group">
                             <input required class="login-field" placeholder="Date de naissance" type="date" name="birthdate" value="${birthDate}">

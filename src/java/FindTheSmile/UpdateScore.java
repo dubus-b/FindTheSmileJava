@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -38,7 +39,7 @@ public class UpdateScore extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UpdateScore</title>");            
+            out.println("<title>Servlet UpdateScore</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet UpdateScore at " + request.getContextPath() + "</h1>");
@@ -59,6 +60,7 @@ public class UpdateScore extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         processRequest(request, response);
     }
 
@@ -74,24 +76,19 @@ public class UpdateScore extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try (PrintWriter out = response.getWriter()) {
-            String email = request.getParameter("email");
-            int bestScore = Integer.parseInt(request.getParameter("bestScore"));
-            int lastScore = Integer.parseInt(request.getParameter("lastScore"));
-            Database dbAction = new Database();
-            dbAction.updateScore(lastScore,bestScore, email);
-        } catch (SQLException ex) {
-            Logger.getLogger(MailAjax.class.getName()).log(Level.SEVERE, null, ex);
+            HttpSession session = request.getSession(false);
+            if (session != null) {
+                Object email = session.getAttribute("email");
+                out.print(email);
+                int bestScore = Integer.parseInt(request.getParameter("bestScore"));
+                int lastScore = Integer.parseInt(request.getParameter("lastScore"));
+                Database dbAction = new Database();
+                try {
+                    dbAction.updateScore(lastScore, bestScore, (String) email);
+                } catch (SQLException ex) {
+                    Logger.getLogger(UpdateScore.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

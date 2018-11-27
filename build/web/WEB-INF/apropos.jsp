@@ -33,7 +33,7 @@ and open the template in the editor.
                 <li><a class="active" href="apropos">A propos</a></li>
                     <% if (session.getAttribute("email") != null) {%>
                 <li class="dropdown">
-                    <a href="javascript:void(0)" class="dropbtn"> <%= (String) request.getAttribute("name")%></a>
+                    <a href="javascript:void(0)" class="dropbtn"> <%= (String) request.getAttribute("firstName")%></a>
                     <div class="dropdown-content">
                         <a href="moncompte">Mon compte</a>
                         <a href="deconnexion">Déconnexion</a>

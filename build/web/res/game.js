@@ -5,7 +5,7 @@
  */
 
 /* global json */
-
+var first = true;
 var historique_timer = [];
 var timerIsOn = false;
 var total_counter = 0;
@@ -13,8 +13,8 @@ var current_point_counter = 0;
 var avg = 0;
 var score = 0;
 var t;
-var lastScore;
-var bestScore;
+var lastScore = 0;
+var bestScore = 0;
 var happy_list = [];
 var sad_list = [];
 var wrong = new Audio('res/sons/wrong.mp3');
@@ -24,6 +24,18 @@ $(document).ready(function () {
     $('#trophée').hide();
 
 });
+
+
+function formatScore(seconds, target)
+{
+    var d = new Date(0, 0, 0, 0, 0, seconds, 0);
+        if (d.getUTCSeconds() >= 10)
+            formated = d.getUTCMinutes() + ':' + d.getUTCSeconds();
+        else
+            formated = d.getUTCMinutes() + ':0' + d.getUTCSeconds();
+            $(target).html(formated);
+}
+
 function grid_generator()
 {
     var current_grid = [];
@@ -53,8 +65,15 @@ function fill_pic_list() {
 }
 function launchGame()
 {
-    bestScore = parseInt($("#bestScore").text());
-    lastScore = parseInt($("#lastScore").text());
+    
+    if (first == true)
+    {
+        bestScore = parseInt($("#bestScore").text())
+        lastScore = parseInt($("#lastScore").text())
+        first = false;
+    }
+    formatScore(bestScore, "#bestScore");
+    formatScore(lastScore, "#lastScore");
     fill_pic_list();
     pics = grid_generator();
     for (idx = 0; idx < 25; idx++)
@@ -117,6 +136,8 @@ function doTimer()
 }
 function reloadGame()
 {
+    $('#trophée').hide();
+    $('#grid').show();
     clearTimeout(t);
     t = 0;
     timerIsOn = 0;
@@ -130,29 +151,26 @@ function reloadGame()
     launchGame();
 }
 
-function formatScore(seconds, target)
-{
-    var d = new Date(0, 0, 0, 0, 0, seconds, 0);
-        if (d.getUTCSeconds() >= 10)
-            formated = d.getUTCMinutes() + ':' + d.getUTCSeconds();
-        else
-            formated = d.getUTCMinutes() + ':0' + d.getUTCSeconds();
-            $(target).html(formated);
-}
-
 function getPoint()
 {
+    
     score = score + 1;
     if (score == 10)
     {
+        
+        debugger;
         $('#trophée').show();
+        $('#grid').hide();
         lastScore = total_counter;
         formatScore(lastScore, "#lastScore");
-        if (total_counter > bestScore)
+        if (total_counter < bestScore)
         {
+            console.log(total_counter, " plus grand que ", bestScore);
             bestScore = total_counter;
             formatScore(bestScore, "#bestScore");
         }
+        if (bestScore == 0)
+            bestScore = total_counter;
         updateScores();
         clearTimeout(t);
     }
@@ -170,11 +188,10 @@ function getPoint()
 
 function updateScores()
 {
+    console.log(bestScore, lastScore);
     var data = {};
     data["bestScore"] = bestScore;
     data["lastScore"] = lastScore;
-    data["email"] = "benjamin@epitech.eu";
-    var json = JSON.stringify(data);
     $.ajax({url: "updateScore",
         type: "POST",
         data : data

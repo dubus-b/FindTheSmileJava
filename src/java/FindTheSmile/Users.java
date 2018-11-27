@@ -11,9 +11,9 @@ package FindTheSmile;
  */
 public class Users {
 
-    private final String name;
-    private final String surname;
-    private final String birstDate; //DATE
+    private final String firstname;
+    private final String lastname;
+    private final String birthDate; //DATE
     private final String phoneNumber;
     private final String email;
     private final String password;
@@ -23,9 +23,9 @@ public class Users {
     public Users(String argName, String argSurname, String argBirstDate,
             String argPhoneNumber, String argEmail, String argPassword,
             Integer argLastScore, Integer argBestScore) {
-        this.name = argName;
-        this.surname = argSurname;
-        this.birstDate = argBirstDate;
+        this.firstname = argName;
+        this.lastname = argSurname;
+        this.birthDate = argBirstDate;
         this.phoneNumber = argPhoneNumber;
         this.email = argEmail;
         this.password = argPassword;
@@ -33,16 +33,16 @@ public class Users {
         this.bestScore = argBestScore;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstname;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getLastName() {
+        return lastname;
     }
 
-    public String getBirstDate() {
-        return birstDate;
+    public String getBirthDate() {
+        return birthDate;
     }
 
     public String getPhoneNumber() {

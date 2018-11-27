@@ -46,7 +46,7 @@ public class Game extends HttpServlet {
             } catch (SQLException ex) {
                 Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
             }
-            request.setAttribute("name", currentUser.getName());
+            request.setAttribute("firstName", currentUser.getFirstName());
             request.setAttribute("bestScore", currentUser.getBestScore());
             request.setAttribute("lastScore", currentUser.getLastScore());
             this.getServletContext().getRequestDispatcher("/WEB-INF/jeu.jsp").forward(request, response);

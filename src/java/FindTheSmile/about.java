@@ -43,8 +43,8 @@ public class about extends HttpServlet {
         HttpSession session = request.getSession(false);
         if (session != null)
         {
-            Object name = session.getAttribute("name");
-            request.setAttribute("name", name);
+            Object name = session.getAttribute("firstName");
+            request.setAttribute("firstName", name);
         }
         this.getServletContext().getRequestDispatcher("/WEB-INF/apropos.jsp").forward(request, response);
     }

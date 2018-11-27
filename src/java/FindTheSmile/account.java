@@ -75,10 +75,10 @@ public class account extends HttpServlet {
                 Logger.getLogger(account.class.getName()).log(Level.SEVERE, null, ex);
             }
             request.setAttribute("email", user.getEmail());
-            request.setAttribute("name", user.getName());
-            request.setAttribute("lastname", user.getSurname());
+            request.setAttribute("lastName", user.getLastName());
+            request.setAttribute("firstName", user.getFirstName());
             request.setAttribute("phone", user.getPhoneNumber());
-            request.setAttribute("birthDate", user.getBirstDate());
+            request.setAttribute("birthDate", user.getBirthDate());
             this.getServletContext().getRequestDispatcher("/WEB-INF/account.jsp").forward(request, response);
         }
     }
@@ -126,8 +126,8 @@ public class account extends HttpServlet {
             }
             out.println("{\"scores\" : \"updated\"}");
         } else {
-            String lastname = request.getParameter("lastname");
-            String firstname = request.getParameter("firstname");
+            String lastname = request.getParameter("lastName");
+            String firstname = request.getParameter("firstName");
             String birthdate = request.getParameter("birthdate");
             String phone = request.getParameter("phone");
             Users user = new Users(lastname, firstname, birthdate, phone, mail, "", 0, 0);
@@ -142,10 +142,10 @@ public class account extends HttpServlet {
                 Logger.getLogger(account.class.getName()).log(Level.SEVERE, null, ex);
             }
             request.setAttribute("email", user.getEmail());
-            request.setAttribute("name", user.getName());
-            request.setAttribute("lastname", user.getSurname());
+            request.setAttribute("lastName", user.getLastName());
+            request.setAttribute("firstName", user.getFirstName());
             request.setAttribute("phone", user.getPhoneNumber());
-            request.setAttribute("birthDate", user.getBirstDate());
+            request.setAttribute("birthDate", user.getBirthDate());
             request.setAttribute("response", "Vos informations ont été actualisées");
             this.getServletContext().getRequestDispatcher("/WEB-INF/account.jsp").forward(request, response);
         }
