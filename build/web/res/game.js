@@ -157,15 +157,12 @@ function getPoint()
     score = score + 1;
     if (score == 10)
     {
-        
-        debugger;
-        $('#trophée').show();
+                $('#trophée').show();
         $('#grid').hide();
         lastScore = total_counter;
         formatScore(lastScore, "#lastScore");
         if (total_counter < bestScore)
         {
-            console.log(total_counter, " plus grand que ", bestScore);
             bestScore = total_counter;
             formatScore(bestScore, "#bestScore");
         }
