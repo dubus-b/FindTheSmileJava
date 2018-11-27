@@ -14,7 +14,6 @@ import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import org.hibernate.hql.internal.antlr.SqlStatementParserTokenTypes;
 
 /**
  *
@@ -80,7 +79,7 @@ public class Database {
         if (r.next() == false) {
             return null;
         } else {
-            DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             Date date = r.getDate("DATEDENAISSANCE");
             String DateString = df.format(date);
             Users ret = new Users(r.getString("NOM"), r.getString("PRENOM"), DateString,
@@ -96,6 +95,23 @@ public class Database {
         try (Connection connection = DriverManager.getConnection(jdbcPath, dbusername, dbpassword)) {
             Statement statement = connection.createStatement();
             String query = "UPDATE USAGERS SET MEILLEURSCORE = "+ bestScore + ", DERNIERSCORE = " + bestScore +" WHERE COURRIEL = '" + email + "'";
+            statement.executeUpdate(query);
+        }
+    }
+    public void updatePassword(String email, String password) throws SQLException
+    {
+         try (Connection connection = DriverManager.getConnection(jdbcPath, dbusername, dbpassword)) {
+            Statement statement = connection.createStatement();
+            String query = "UPDATE USAGERS SET MOTDEPASSE = '"+ password + "' WHERE COURRIEL = '" + email + "'";
+            statement.executeUpdate(query);
+        }
+    }
+    public void updateUser(Users user) throws SQLException
+    {
+         try (Connection connection = DriverManager.getConnection(jdbcPath, dbusername, dbpassword)) {
+            Statement statement = connection.createStatement();
+            String query = "UPDATE USAGERS SET NOM = '" + user.getSurname() + "', PRENOM = '" + user.getName() + "', DATEDENAISSANCE =  '" + user.getBirstDate() + "', TELEPHONNE = '" + user.getPhoneNumber()
+                    + "' WHERE COURRIEL = '" + user.getEmail() + "'";
             statement.executeUpdate(query);
         }
     }

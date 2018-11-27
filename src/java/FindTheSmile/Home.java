@@ -6,7 +6,6 @@
 package FindTheSmile;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -45,7 +44,7 @@ public class Home extends HttpServlet {
         if (session != null){
             Object name = session.getAttribute("name");
             request.setAttribute("name", name);
-    }
+        }
         this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward( request, response );
     }
 
@@ -57,7 +56,8 @@ public class Home extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{        
+    @Override        
+    public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{        
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         Database dbAction = new Database();
@@ -77,10 +77,8 @@ public void doPost( HttpServletRequest request, HttpServletResponse response ) t
             } catch (SQLException ex) {
                 Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
             }
-            PrintWriter out = response.getWriter();
             session = request.getSession();
             session.setAttribute("email", email);
-            System.out.println(user.getSurname());
             session.setAttribute("name", user.getSurname());
             response.sendRedirect("/TP02-bdubus/jeu");  
         }

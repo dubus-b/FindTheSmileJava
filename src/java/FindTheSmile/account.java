@@ -39,7 +39,7 @@ public class account extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet account</title>");            
+            out.println("<title>Servlet account</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet account at " + request.getContextPath() + "</h1>");
@@ -62,13 +62,10 @@ public class account extends HttpServlet {
             throws ServletException, IOException {
         Error error = new Error();
         HttpSession session = request.getSession(false);
-        if (session.getAttribute("email") == null)
-        {
+        if (session.getAttribute("email") == null) {
             request.setAttribute("erreur", error.getUnauthorized());
-            this.getServletContext().getRequestDispatcher("/WEB-INF/erreur.jsp").forward( request, response );
-        }
-        else
-        {
+            this.getServletContext().getRequestDispatcher("/WEB-INF/erreur.jsp").forward(request, response);
+        } else {
             Object email = session.getAttribute("email");
             Database dbAction = new Database();
             Users user = null;
@@ -97,7 +94,61 @@ public class account extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        PrintWriter out = response.getWriter();
+        HttpSession session;
+        session = request.getSession(false);
+        String password = request.getParameter("newPasswd");
+        String reinitScore = request.getParameter("scores");
+        String mail = (String) session.getAttribute("email");
+        Database dbAction = new Database();
+        if (password != null) {
+            Users user = null;
+            try {
+                user = dbAction.getUserByEmail(mail);
+            } catch (SQLException ex) {
+                Logger.getLogger(account.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (user.getPassword().equals(request.getParameter("oldPasswd"))) {
+                try {
+                    dbAction.updatePassword(mail, password);
+                } catch (SQLException ex) {
+                    Logger.getLogger(account.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                out.println("{\"password\" : \"updated\"}");
+            } else {
+                out.println("{\"password\" : \"wrong password\"}");
+            }
+        } else if (reinitScore != null) {
+            try {
+                dbAction.updateScore(0, 0, mail);
+            } catch (SQLException ex) {
+                Logger.getLogger(account.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            out.println("{\"scores\" : \"updated\"}");
+        } else {
+            String lastname = request.getParameter("lastname");
+            String firstname = request.getParameter("firstname");
+            String birthdate = request.getParameter("birthdate");
+            String phone = request.getParameter("phone");
+            Users user = new Users(lastname, firstname, birthdate, phone, mail, "", 0, 0);
+            try {
+                dbAction.updateUser(user);
+            } catch (SQLException ex) {
+                Logger.getLogger(account.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                user = dbAction.getUserByEmail(mail);
+            } catch (SQLException ex) {
+                Logger.getLogger(account.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            request.setAttribute("email", user.getEmail());
+            request.setAttribute("name", user.getName());
+            request.setAttribute("lastname", user.getSurname());
+            request.setAttribute("phone", user.getPhoneNumber());
+            request.setAttribute("birthDate", user.getBirstDate());
+            request.setAttribute("response", "Vos informations ont été actualisées");
+            this.getServletContext().getRequestDispatcher("/WEB-INF/account.jsp").forward(request, response);
+        }
     }
 
     /**

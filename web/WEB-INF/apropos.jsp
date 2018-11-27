@@ -27,16 +27,21 @@ and open the template in the editor.
         <meta name="theme-color" content="#ffffff">
     </head>
     <body>
-         <nav>
-                <ul>
-                    <li><a href="accueil">Accueil</a></li>
-                    <li><a class="active" href="apropos.html">A propos</a></li>
-                    <% if(session.getAttribute("email") != null) { %>
-                <li><a href="moncompte">Mon compte</a></li>
-                    <% } %>
-                </ul>
-            </nav>
-                <div class="box">
+        <nav>
+            <ul>
+                <li><a href="accueil">Accueil</a></li>
+                <li><a class="active" href="apropos">A propos</a></li>
+                    <% if (session.getAttribute("email") != null) {%>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn"> <%= (String) request.getAttribute("name")%></a>
+                    <div class="dropdown-content">
+                        <a href="moncompte">Mon compte</a>
+                        <a href="deconnexion">Déconnexion</a>
+                </li>
+                <% }%>
+            </ul>
+        </nav>
+        <div class="box">
             <div class="box-content">
                 <p>Ce site a été réalisé par <b>Benjamin DUBUS</b> dans le cadre du module <i>Technologie de l'inforoute.</i>
                 </p>

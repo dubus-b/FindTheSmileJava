@@ -39,16 +39,14 @@ public class Game extends HttpServlet {
         session = request.getSession(false);
         if (session.getAttribute("email") != null) {
             String mail = (String) session.getAttribute("email");
-            System.out.println("Mail : " + mail);
             Database dbAction = new Database();
             Users currentUser = null;
             try {
                 currentUser = dbAction.getUserByEmail(mail);
             } catch (SQLException ex) {
-                System.out.println("FindTheSmile.Game.doGet()");
                 Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
             }
-            request.setAttribute("name", currentUser.getSurname());
+            request.setAttribute("name", currentUser.getName());
             request.setAttribute("bestScore", currentUser.getBestScore());
             request.setAttribute("lastScore", currentUser.getLastScore());
             this.getServletContext().getRequestDispatcher("/WEB-INF/jeu.jsp").forward(request, response);
