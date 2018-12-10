@@ -37,44 +37,23 @@ public class Game extends HttpServlet {
         Error error = new Error();
         HttpSession session;
         session = request.getSession(false);
-        if (session.getAttribute("email") != null) {
-            String mail = (String) session.getAttribute("email");
-            Database dbAction = new Database();
-            Users currentUser = null;
-            try {
-                currentUser = dbAction.getUserByEmail(mail);
-            } catch (SQLException ex) {
-                Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+        if (session != null) {
+            if (session.getAttribute("User") != null) {
+                Users currentUser = (Users) session.getAttribute("User");
+                Database database = new Database();
+                try {
+                    currentUser = database.getUserByEmail(currentUser.getEmail());
+                } catch (SQLException ex) {
+                    Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                request.setAttribute("firstName", currentUser.getFirstName());
+                request.setAttribute("bestScore", currentUser.getBestScore());
+                request.setAttribute("lastScore", currentUser.getLastScore());
+                this.getServletContext().getRequestDispatcher("/WEB-INF/jeu.jsp").forward(request, response);
             }
-            request.setAttribute("firstName", currentUser.getFirstName());
-            request.setAttribute("bestScore", currentUser.getBestScore());
-            request.setAttribute("lastScore", currentUser.getLastScore());
-            this.getServletContext().getRequestDispatcher("/WEB-INF/jeu.jsp").forward(request, response);
-        }
-        else
-        {
-          request.setAttribute("erreur", error.getUnauthorized());
-          this.getServletContext().getRequestDispatcher("/WEB-INF/erreur.jsp").forward(request, response);
+        } else {
+            request.setAttribute("erreur", error.getUnauthorized());
+            this.getServletContext().getRequestDispatcher("/WEB-INF/erreur.jsp").forward(request, response);
         }
     }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-   
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

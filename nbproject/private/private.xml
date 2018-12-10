@@ -5,7 +5,7 @@
             <url>src/java/FindTheSmile/Home.java</url>
             <bookmark id="1">
                 <name/>
-                <line>53</line>
+                <line>56</line>
                 <key/>
             </bookmark>
         </file>
@@ -14,17 +14,6 @@
         <group>
             <file>file:/Users/bdubus/NetBeansProjects/TP02-bdubus/src/java/FindTheSmile/Game.java</file>
             <file>file:/Users/bdubus/NetBeansProjects/TP02-bdubus/src/java/FindTheSmile/Home.java</file>
-            <file>file:/Users/bdubus/NetBeansProjects/TP02-bdubus/src/java/FindTheSmile/SignUp.java</file>
-            <file>file:/Users/bdubus/NetBeansProjects/TP02-bdubus/src/java/FindTheSmile/Database.java</file>
-            <file>file:/Users/bdubus/NetBeansProjects/TP02-bdubus/src/java/FindTheSmile/about.java</file>
-            <file>file:/Users/bdubus/NetBeansProjects/TP02-bdubus/web/WEB-INF/account.jsp</file>
-            <file>file:/Users/bdubus/NetBeansProjects/TP02-bdubus/web/WEB-INF/apropos.jsp</file>
-            <file>file:/Users/bdubus/NetBeansProjects/TP02-bdubus/src/java/FindTheSmile/UpdateScore.java</file>
-            <file>file:/Users/bdubus/NetBeansProjects/TP02-bdubus/web/WEB-INF/index.jsp</file>
-            <file>file:/Users/bdubus/NetBeansProjects/TP02-bdubus/src/java/FindTheSmile/Users.java</file>
-            <file>file:/Users/bdubus/NetBeansProjects/TP02-bdubus/src/java/FindTheSmile/account.java</file>
-            <file>file:/Users/bdubus/NetBeansProjects/TP02-bdubus/web/WEB-INF/jeu.jsp</file>
-            <file>file:/Users/bdubus/NetBeansProjects/TP02-bdubus/web/res/game.js</file>
         </group>
     </open-files>
 </project-private>

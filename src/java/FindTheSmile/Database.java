@@ -8,7 +8,6 @@ package FindTheSmile;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
@@ -85,7 +84,7 @@ public class Database {
             Users ret = new Users(r.getString("NOM"), r.getString("PRENOM"), DateString,
                     r.getString("TELEPHONNE"), r.getString("COURRIEL"),
                     r.getString("MOTDEPASSE"), r.getInt("DERNIERSCORE"),
-                    r.getInt("MEILLEURSCORE"));
+                    r.getInt("MEILLEURSCORE"), r.getInt("ID"));
             connection.close();
             return ret;
         }

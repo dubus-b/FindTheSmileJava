@@ -23,8 +23,8 @@
          <nav>
                 <ul>
                     <li><a href="accueil">Accueil</a></li>
-                    <li><a href="apropos.html">A propos</a></li>
-                    <% if(session.getAttribute("email") != null) { %>
+                    <li><a href="apropos">A propos</a></li>
+                    <% if(session.getAttribute("User") != null) { %>
                 <li><a href="moncompte">Mon compte</a></li>
                     <% } %>
                 </ul>

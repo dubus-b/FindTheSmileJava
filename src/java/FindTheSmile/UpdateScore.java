@@ -60,7 +60,6 @@ public class UpdateScore extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         processRequest(request, response);
     }
 
@@ -78,17 +77,21 @@ public class UpdateScore extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession(false);
             if (session != null) {
-                Object email = session.getAttribute("email");
-                out.print(email);
+                Users user = (Users) session.getAttribute("User");
                 int bestScore = Integer.parseInt(request.getParameter("bestScore"));
                 int lastScore = Integer.parseInt(request.getParameter("lastScore"));
                 Database dbAction = new Database();
                 try {
-                    dbAction.updateScore(lastScore, bestScore, (String) email);
+                    dbAction.updateScore(lastScore, bestScore, (String) user.getEmail());
+                    out.println(bestScore);
+                    System.out.println(bestScore);
+                    out.println(lastScore);
                 } catch (SQLException ex) {
                     Logger.getLogger(UpdateScore.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
+            else
+                System.out.println("Pas connecté");
         }
     }
 }

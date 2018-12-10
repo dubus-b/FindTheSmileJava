@@ -25,7 +25,7 @@
               <ul>
                 <li><a class="active" href="accueil">Accueil</a></li>
                 <li><a href="apropos">A propos</a></li>
-                 <% if (session.getAttribute("email") != null) { %>
+                 <% if (session.getAttribute("User") != null) { %>
                 <li class="dropdown">
                     <a href="javascript:void(0)" class="dropbtn"> <%= (String)request.getAttribute("firstName") %></a>
                     <div class="dropdown-content">
@@ -52,7 +52,7 @@
         </div>
          <div class="login">
                 <div class="login-screen">
-                    <% if(session.getAttribute("email") == null) { %>
+                    <% if(session.getAttribute("User") == null) { %>
                         <div class="app-title">
                     <h1>Connectez-vous pour jouer</h1>
                     </div>
@@ -73,7 +73,7 @@
                         </form>
                     </div>
                     <% } %>
-                     <% if(session.getAttribute("email") != null) { %>
+                     <% if(session.getAttribute("User") != null) { %>
                     <div class="login-form">
                         <form action="jeu">
                             <button class="btn btn-primary btn-large btn-block">Jouer</button>

@@ -62,18 +62,11 @@ public class account extends HttpServlet {
             throws ServletException, IOException {
         Error error = new Error();
         HttpSession session = request.getSession(false);
-        if (session.getAttribute("email") == null) {
+        if (session.getAttribute("User") == null) {
             request.setAttribute("erreur", error.getUnauthorized());
             this.getServletContext().getRequestDispatcher("/WEB-INF/erreur.jsp").forward(request, response);
         } else {
-            Object email = session.getAttribute("email");
-            Database dbAction = new Database();
-            Users user = null;
-            try {
-                user = dbAction.getUserByEmail((String) email);
-            } catch (SQLException ex) {
-                Logger.getLogger(account.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            Users user = (Users) session.getAttribute("User");
             request.setAttribute("email", user.getEmail());
             request.setAttribute("lastName", user.getLastName());
             request.setAttribute("firstName", user.getFirstName());
@@ -99,7 +92,8 @@ public class account extends HttpServlet {
         session = request.getSession(false);
         String password = request.getParameter("newPasswd");
         String reinitScore = request.getParameter("scores");
-        String mail = (String) session.getAttribute("email");
+        Users s_user = (Users) session.getAttribute("User");
+        String mail = s_user.getEmail();
         Database dbAction = new Database();
         if (password != null) {
             Users user = null;
@@ -130,7 +124,9 @@ public class account extends HttpServlet {
             String firstname = request.getParameter("firstName");
             String birthdate = request.getParameter("birthdate");
             String phone = request.getParameter("phone");
-            Users user = new Users(lastname, firstname, birthdate, phone, mail, "", 0, 0);
+            String email;
+            email = request.getParameter("email");
+            Users user = new Users(lastname, firstname, birthdate, phone, email, "", 0, 0, 0);
             try {
                 dbAction.updateUser(user);
             } catch (SQLException ex) {

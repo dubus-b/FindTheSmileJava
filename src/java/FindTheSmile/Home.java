@@ -42,8 +42,11 @@ public class Home extends HttpServlet {
     public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
         HttpSession session = request.getSession(false);
         if (session != null){
-            Object name = session.getAttribute("firstName");
-            request.setAttribute("firstName", name);
+            Users user = (Users) session.getAttribute("User");
+            if (user == null)
+                session.invalidate();
+            else
+                request.setAttribute("firstName", user.getFirstName());
         }
         this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward( request, response );
     }
@@ -78,8 +81,7 @@ public class Home extends HttpServlet {
                 Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
             }
             session = request.getSession();
-            session.setAttribute("email", email);
-            session.setAttribute("firstName", user.getFirstName());
+            session.setAttribute("User", user);
             response.sendRedirect("/TP02-bdubus/jeu");  
         }
         else

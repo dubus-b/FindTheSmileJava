@@ -26,7 +26,7 @@
             <ul>
                 <li><a href="accueil">Accueil</a></li>
                 <li><a href="apropos">A propos</a></li>
-                    <% if (session.getAttribute("email") != null) {%>
+                    <% if (session.getAttribute("User") != null) {%>
                 <li class="dropdown">
                     <a href="javascript:void(0)" class="dropbtn"> <%= (String) request.getAttribute("firstName")%></a>
                     <div class="dropdown-content">
@@ -53,6 +53,10 @@
                         </div>
                         <div class="control-group">
                             <input required class="login-field" placeholder="Numéro de téléphone" type="tel" name="phone" value="${phone}">
+                        </div>
+                        <div class="control-group">
+                            <p id="invalid-email"></p>
+                            <input required class="login-field" id="mail" placeholder="Adresse de courriel" type="email" minLenght="3" maxlength="19" name="email" value="${email}">
                         </div>
                         <p>${response}</p>
                         <input required class="btn btn-primary btn-large btn-block" type="submit" value="Actualiser les informations">

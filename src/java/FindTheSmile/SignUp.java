@@ -6,20 +6,7 @@
 package FindTheSmile;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +19,8 @@ import javax.servlet.http.HttpSession;
  */
 public class SignUp extends HttpServlet {
     
-    public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
+    public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException
+    {
         HttpSession session = request.getSession(false);
         if (session != null){
             Object name = session.getAttribute("name");
@@ -52,7 +40,7 @@ public class SignUp extends HttpServlet {
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
             try {
-                Users User = new Users(firstname, lastname, sbirthdate, phone, mail, password, 0, 0);
+                Users User = new Users(firstname, lastname, sbirthdate, phone, mail, password, 0, 0, 0);
                 Database dbaction = new Database();
                 int result = dbaction.SignUp(User);
             } catch (SQLException ex) {

@@ -19,10 +19,11 @@ public class Users {
     private final String password;
     private final Integer lastScore;
     private final Integer bestScore;
+    private final Integer id;
 
     public Users(String argName, String argSurname, String argBirstDate,
             String argPhoneNumber, String argEmail, String argPassword,
-            Integer argLastScore, Integer argBestScore) {
+            Integer argLastScore, Integer argBestScore, Integer argId) {
         this.firstname = argName;
         this.lastname = argSurname;
         this.birthDate = argBirstDate;
@@ -31,6 +32,7 @@ public class Users {
         this.password = argPassword;
         this.lastScore = argLastScore;
         this.bestScore = argBestScore;
+        this.id = argId;
     }
 
     public String getFirstName() {
@@ -63,5 +65,8 @@ public class Users {
 
     public Integer getBestScore() {
         return bestScore;
+    }
+    public Integer getId() {
+        return id;
     }
 }

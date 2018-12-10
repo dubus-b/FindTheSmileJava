@@ -19,53 +19,17 @@ import javax.servlet.http.HttpSession;
  * @author bdubus
  */
 public class about extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
         HttpSession session = request.getSession(false);
         if (session != null)
         {
-            Object name = session.getAttribute("firstName");
-            request.setAttribute("firstName", name);
+            Users user = (Users) session.getAttribute("User");
+            if (user == null)
+                session.invalidate();
+            else
+                request.setAttribute("firstName", user.getFirstName());
         }
         this.getServletContext().getRequestDispatcher("/WEB-INF/apropos.jsp").forward(request, response);
     }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

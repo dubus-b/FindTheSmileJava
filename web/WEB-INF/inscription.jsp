@@ -23,24 +23,24 @@
     </head>
     <body>
         <nav>
-              <ul>
+            <ul>
                 <li><a href="accueil">Accueil</a></li>
                 <li><a href="apropos">A propos</a></li>
-                 <% if (session.getAttribute("email") != null) { %>
+                    <% if (session.getAttribute("User") != null) {%>
                 <li class="dropdown">
-                    <a href="javascript:void(0)" class="dropbtn"> <%= (String)request.getAttribute("name") %></a>
+                    <a href="javascript:void(0)" class="dropbtn"> <%= (String) request.getAttribute("name")%></a>
                     <div class="dropdown-content">
                         <a href="moncompte">Mon compte</a>
                         <a href="deconnexion">Déconnexion</a>
                 </li>
-                    <% }%>
+                <% }%>
             </ul>
         </nav>
         <div class="login">
             <div class="login-screen">
-                <div class="login">
+                <div class="login-form">
                     <form action="inscription" method="post">
-                        <h1 class="title">Informations personelles</h1>
+                        <h1 class="title">Inscription</h1>
                         <div class="control-group">
                             <input required class="login-field" placeholder="Prénom" type="text" name="firstname" value="">
                         </div>
@@ -58,10 +58,11 @@
                             <input required class="login-field" id="mail" placeholder="Adresse de courriel" type="email" minLenght="3" maxlength="19" name="email" value="">
                         </div>
                         <div class="control-group">
-                            <input required class="login-field" placeholder="Mot de passe" type="password" name="passwd" value="">
+                            <p id="invalid-password"></p>
+                            <input required class="login-field"  id="password" placeholder="Mot de passe" type="password" name="passwd" value="">
                         </div>
                         <div class="control-group">
-                            <input required class="login-field" placeholder="Confirmez le mot de passe" type="password" name="confirm-passwd" value="">
+                            <input required class="login-field"  id="cpassword" placeholder="Confirmez le mot de passe" type="password" name="confirm-passwd" value="">
                         </div>
                         <input id="submit-btn"required class="btn btn-primary btn-large btn-block" type="submit" value="Soumettre">
                     </form>
@@ -88,9 +89,33 @@
                     $("#submit-btn").css('background', 'grey');
                 } else
                 {
+                    $("#invalid-email").html("");
                     $("#submit-btn").attr("disabled", false);
                     $("#submit-btn").css('background', '#3498DB');
                 }
             }});
+    });
+    $("#password").keyup(function () {
+        if ($('#password').val() === $('#cpassword').val())
+        {
+            $("#invalid-password").html("");
+
+        } else {
+            $("#invalid-password").html("Les mots de passe entrées sont différents");
+            $("#submit-btn").attr("disabled", true);
+            $("#submit-btn").css('background', 'grey');
+        }
+    });
+    $("#cpassword").keyup(function () {
+        if ($('#password').val() === $('#cpassword').val())
+        {
+            $("#invalid-password").html("");
+            $("#submit-btn").attr("disabled", false);
+            $("#submit-btn").css('background', '#3498DB');
+        } else {
+            $("#invalid-password").html("Les mots de passe entrées sont différents");
+            $("#submit-btn").attr("disabled", true);
+            $("#submit-btn").css('background', 'grey');
+        }
     });
 </script>
