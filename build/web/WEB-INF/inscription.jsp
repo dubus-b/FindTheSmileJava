@@ -28,7 +28,7 @@
                 <li><a href="apropos">A propos</a></li>
                     <% if (session.getAttribute("User") != null) {%>
                 <li class="dropdown">
-                    <a href="javascript:void(0)" class="dropbtn"> <%= (String) request.getAttribute("name")%></a>
+                    <a href="javascript:void(0)" class="dropbtn"> <%= (String) request.getAttribute("firstName")%></a>
                     <div class="dropdown-content">
                         <a href="moncompte">Mon compte</a>
                         <a href="deconnexion">Déconnexion</a>
@@ -42,25 +42,32 @@
                     <form action="inscription" method="post">
                         <h1 class="title">Inscription</h1>
                         <div class="control-group">
+                            <label>Prénom :</label>
                             <input required class="login-field" placeholder="Prénom" type="text" name="firstname" value="">
                         </div>
+                         <label>Nom :</label>
                         <div class="control-group">
                             <input required class="login-field" placeholder="Nom" type="text" name="lastname" value="">
                         </div>
+                         <label>Date de naissance :</label>
                         <div class="control-group">
                             <input required class="login-field" placeholder="Date de naissance" type="date" name="birthdate" value="">
                         </div>
+                         <label>Numéro de téléphone :</label>
                         <div class="control-group">
                             <input required class="login-field" placeholder="Numéro de téléphone" type="tel" name="phone" value="">
                         </div>
                         <div class="control-group">
+                        <label>Adresse de courriel:</label>
                             <p id="invalid-email"></p>
                             <input required class="login-field" id="mail" placeholder="Adresse de courriel" type="email" minLenght="3" maxlength="19" name="email" value="">
                         </div>
+                        <label>Mot de passe :</label>
                         <div class="control-group">
                             <p id="invalid-password"></p>
                             <input required class="login-field"  id="password" placeholder="Mot de passe" type="password" name="passwd" value="">
                         </div>
+                         <label>Confirmer le mot de passe :</label>
                         <div class="control-group">
                             <input required class="login-field"  id="cpassword" placeholder="Confirmez le mot de passe" type="password" name="confirm-passwd" value="">
                         </div>

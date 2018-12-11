@@ -5,15 +5,21 @@
             <url>src/java/FindTheSmile/Home.java</url>
             <bookmark id="1">
                 <name/>
-                <line>56</line>
+                <line>65</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/bdubus/NetBeansProjects/TP02-bdubus/src/java/FindTheSmile/Game.java</file>
+            <file>file:/Users/bdubus/NetBeansProjects/TP02-bdubus/web/WEB-INF/inscription.jsp</file>
             <file>file:/Users/bdubus/NetBeansProjects/TP02-bdubus/src/java/FindTheSmile/Home.java</file>
+            <file>file:/Users/bdubus/NetBeansProjects/TP02-bdubus/src/java/FindTheSmile/SignUp.java</file>
+            <file>file:/Users/bdubus/NetBeansProjects/TP02-bdubus/web/WEB-INF/account.jsp</file>
+            <file>file:/Users/bdubus/NetBeansProjects/TP02-bdubus/src/java/FindTheSmile/Database.java</file>
+            <file>file:/Users/bdubus/NetBeansProjects/TP02-bdubus/src/java/FindTheSmile/Users.java</file>
+            <file>file:/Users/bdubus/NetBeansProjects/TP02-bdubus/web/WEB-INF/jeu.jsp</file>
+            <file>file:/Users/bdubus/NetBeansProjects/TP02-bdubus/src/java/FindTheSmile/Error.java</file>
         </group>
     </open-files>
 </project-private>

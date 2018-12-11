@@ -40,6 +40,7 @@ public class Database {
             }
             String query = "INSERT INTO USAGERS (NOM, PRENOM, DATEDENAISSANCE, TELEPHONNE,COURRIEL, MOTDEPASSE,DERNIERSCORE, MEILLEURSCORE, ID) VALUES ('" + newUser.getLastName()+ "', '" + newUser.getFirstName()
                     + "','" + newUser.getBirthDate() + "', '" + newUser.getPhoneNumber() + "', '" + newUser.getEmail() + "', '" + newUser.getPassword() + "',0,0," + (last_id + 1) + ")";
+            System.out.println(query);
             int result = stmt.executeUpdate(query);
             connection.close();
             return result;

@@ -24,8 +24,8 @@ public class Users {
     public Users(String argName, String argSurname, String argBirstDate,
             String argPhoneNumber, String argEmail, String argPassword,
             Integer argLastScore, Integer argBestScore, Integer argId) {
-        this.firstname = argName;
-        this.lastname = argSurname;
+        this.firstname = argSurname;
+        this.lastname = argName;
         this.birthDate = argBirstDate;
         this.phoneNumber = argPhoneNumber;
         this.email = argEmail;

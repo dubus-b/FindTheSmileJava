@@ -43,17 +43,22 @@
                     <form action="moncompte" method="POST">
                         <h1 class="title"> Mes informations personelles</h1>
                         <div class="control-group">
+                            <label>Prénom :</label>
                             <input required class="login-field" placeholder="Prénom" type="text" name="firstName" value="${firstName}">
                         </div>
+                        <label>Nom :</label>
                         <div class="control-group">
                             <input required class="login-field" placeholder="Nom" type="text" name="lastName" value="${lastName}">
                         </div>
+                        <label>Date de naissance :</label>
                         <div class="control-group">
                             <input required class="login-field" placeholder="Date de naissance" type="date" name="birthdate" value="${birthDate}">
                         </div>
+                        <label>Numéro de téléphone :</label>
                         <div class="control-group">
                             <input required class="login-field" placeholder="Numéro de téléphone" type="tel" name="phone" value="${phone}">
                         </div>
+                        <label>Adresse de courriel :</label>
                         <div class="control-group">
                             <p id="invalid-email"></p>
                             <input required class="login-field" id="mail" placeholder="Adresse de courriel" type="email" minLenght="3" maxlength="19" name="email" value="${email}">
@@ -65,7 +70,6 @@
                     <button onclick="reinitScore()" class="btn btn-primary btn-large btn-block">Réinitialiser les scores</button>
                     <br>
                     <div>
-
                         <label>Ancien mot de passe :</label>
                         <input type="password" id="oldPasswd">
                         <br>

@@ -43,10 +43,19 @@ public class Home extends HttpServlet {
         HttpSession session = request.getSession(false);
         if (session != null){
             Users user = (Users) session.getAttribute("User");
+            
             if (user == null)
                 session.invalidate();
             else
+            {
+                Database database = new Database();
+            try {
+                user = database.getUserByEmail(user.getEmail());
+            } catch (SQLException ex) {
+                Logger.getLogger(account.class.getName()).log(Level.SEVERE, null, ex);
+            }
                 request.setAttribute("firstName", user.getFirstName());
+            }
         }
         this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward( request, response );
     }

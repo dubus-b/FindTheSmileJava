@@ -21,42 +21,6 @@ import javax.servlet.http.HttpSession;
  * @author bdubus
  */
 public class account extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet account</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet account at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -66,7 +30,14 @@ public class account extends HttpServlet {
             request.setAttribute("erreur", error.getUnauthorized());
             this.getServletContext().getRequestDispatcher("/WEB-INF/erreur.jsp").forward(request, response);
         } else {
+            
             Users user = (Users) session.getAttribute("User");
+            Database database = new Database();
+            try {
+                user = database.getUserByEmail(user.getEmail());
+            } catch (SQLException ex) {
+                Logger.getLogger(account.class.getName()).log(Level.SEVERE, null, ex);
+            }
             request.setAttribute("email", user.getEmail());
             request.setAttribute("lastName", user.getLastName());
             request.setAttribute("firstName", user.getFirstName());
