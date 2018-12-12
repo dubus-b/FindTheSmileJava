@@ -107,12 +107,14 @@ public class Database {
             connection.close();
         }
     }
-    public void updateUser(Users user) throws SQLException
+    public void updateUser(Users user, String smail) throws SQLException
     {
          try (Connection connection = DriverManager.getConnection(jdbcPath, dbusername, dbpassword)) {
             Statement statement = connection.createStatement();
-            String query = "UPDATE USAGERS SET NOM = '" + user.getLastName()+ "', PRENOM = '" + user.getFirstName()+ "', DATEDENAISSANCE =  '" + user.getBirthDate() + "', TELEPHONNE = '" + user.getPhoneNumber()
-                    + "' WHERE COURRIEL = '" + user.getEmail() + "'";
+            String query = "UPDATE USAGERS SET COURRIEL = '" + user.getEmail() + "', NOM = '" + user.getLastName() + "', PRENOM = '" + user.getFirstName()+ "', DATEDENAISSANCE =  '" + user.getBirthDate() + "', TELEPHONNE = '" + user.getPhoneNumber()
+                    + "' WHERE COURRIEL = '" + smail + "'";
+                         System.out.println(query);
+
             statement.executeUpdate(query);
             connection.close();
         }

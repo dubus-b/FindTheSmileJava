@@ -64,18 +64,18 @@ public class account extends HttpServlet {
         String password = request.getParameter("newPasswd");
         String reinitScore = request.getParameter("scores");
         Users s_user = (Users) session.getAttribute("User");
-        String mail = s_user.getEmail();
+        String smail = s_user.getEmail();
         Database dbAction = new Database();
         if (password != null) {
             Users user = null;
             try {
-                user = dbAction.getUserByEmail(mail);
+                user = dbAction.getUserByEmail(smail);
             } catch (SQLException ex) {
                 Logger.getLogger(account.class.getName()).log(Level.SEVERE, null, ex);
             }
             if (user.getPassword().equals(request.getParameter("oldPasswd"))) {
                 try {
-                    dbAction.updatePassword(mail, password);
+                    dbAction.updatePassword(smail, password);
                 } catch (SQLException ex) {
                     Logger.getLogger(account.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -85,7 +85,7 @@ public class account extends HttpServlet {
             }
         } else if (reinitScore != null) {
             try {
-                dbAction.updateScore(0, 0, mail);
+                dbAction.updateScore(0, 0, smail);
             } catch (SQLException ex) {
                 Logger.getLogger(account.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -99,12 +99,12 @@ public class account extends HttpServlet {
             email = request.getParameter("email");
             Users user = new Users(lastname, firstname, birthdate, phone, email, "", 0, 0, 0);
             try {
-                dbAction.updateUser(user);
+                dbAction.updateUser(user, smail);
             } catch (SQLException ex) {
                 Logger.getLogger(account.class.getName()).log(Level.SEVERE, null, ex);
             }
             try {
-                user = dbAction.getUserByEmail(mail);
+                user = dbAction.getUserByEmail(email);
             } catch (SQLException ex) {
                 Logger.getLogger(account.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -117,15 +117,4 @@ public class account extends HttpServlet {
             this.getServletContext().getRequestDispatcher("/WEB-INF/account.jsp").forward(request, response);
         }
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }
