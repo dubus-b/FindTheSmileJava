@@ -40,7 +40,7 @@ public class SignUp extends HttpServlet {
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
             try {
-                Users User = new Users(firstname, lastname, sbirthdate, phone, mail, password, 0, 0, 0);
+                Users User = new Users(lastname, firstname, sbirthdate, phone, mail, password, 0, 0, 0);
                 Database dbaction = new Database();
                 int result = dbaction.SignUp(User);
             } catch (SQLException ex) {
